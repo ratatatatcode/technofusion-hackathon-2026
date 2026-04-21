@@ -29,7 +29,7 @@ export default function SignupForm() {
                     <Label>Confirm Password</Label>
                     <Input type="password" className="border border-black p-1"/>
                 </div>
-                {/* THE COLORS ARE TEMPORARY PLEASE CHANGE THEM INTO WHAT THE COLOR PALLET ON THE THEMES */}
+                {/* THE COLORS AND STYLE ARE TEMPORARY PLEASE CHANGE THEM INTO WHAT THE COLOR PALLET ON THE THEMES */}
                 <Button type="submit" variant="default" size="lg" className="w-full bg-green-600 hover:bg-green-800 cursor-pointer text-white">
                     Signup
                 </Button>

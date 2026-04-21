@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-
+// ADD MORE PROPS IF NEEDED
 type FormProps = {
     title: string,
     children: ReactNode,
