@@ -10,9 +10,9 @@ export default function NavBar() {
           height={50}
           width={50}
           alt="Campus Quest Logo"
-          className="translate-x-1 rotate-10"
+          className="translate-x-0.5 rotate-10"
         />
-        <p className="text-primary text-xl font-extrabold">QUEST</p>
+        <p className="text-primary text-md font-extrabold">CAMPUS QUEST</p>
       </div>
       <ul className="flex gap-8 font-semibold">
         <li>
