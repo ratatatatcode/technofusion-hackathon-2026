@@ -1097,7 +1097,7 @@ button { background: none; }
 /* ===== MASCOT GUIDE (Pixel Pete) ===== */
 .mascot-guide {
   position: fixed;
-  left: 24px;
+  right: 24px;
   bottom: 24px;
   z-index: 50;
   display: flex;
