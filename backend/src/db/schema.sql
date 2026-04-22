@@ -17,16 +17,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 /* ===== Main Dashboard ===== */
-CREATE TABLE IF NOT EXISTS users (
-    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(150) NOT NULL,
-    email VARCHAR(190) NOT NULL UNIQUE,
-    department VARCHAR(100) NOT NULL,
-    role ENUM('ADMIN', 'STUDENT', 'VERIFIER', 'FACULTY') NOT NULL DEFAULT 'STUDENT',
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS missions (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
@@ -37,7 +27,7 @@ CREATE TABLE IF NOT EXISTS missions (
     sdg_tag VARCHAR(30) NOT NULL,
     points INT NOT NULL,
     evidence_requirements VARCHAR(1000) NOT NULL,
-    created_by BIGINT UNSIGNED NOT NULL,
+    created_by INT NOT NULL,
     is_active TINYINT(1) NOT NULL DEFAULT 1,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -48,7 +38,7 @@ CREATE TABLE IF NOT EXISTS missions (
 CREATE TABLE IF NOT EXISTS submissions (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     mission_id BIGINT UNSIGNED NOT NULL,
-    student_id BIGINT UNSIGNED NOT NULL,
+    student_id INT NOT NULL,
     file_hash CHAR(64) NOT NULL,
     file_url VARCHAR(255) NOT NULL,
     original_file_name VARCHAR(255) NOT NULL,
@@ -62,4 +52,29 @@ CREATE TABLE IF NOT EXISTS submissions (
     CONSTRAINT uq_submissions_file_hash UNIQUE KEY (file_hash),
     INDEX idx_submissions_student_id (student_id),
     INDEX idx_submissions_status_submitted_at (status, submitted_at)
+);
+
+
+
+/* ===== Points + Leaderboard ===== */
+CREATE TABLE IF NOT EXISTS student_points (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    name VARCHAR(100), 
+    department VARCHAR(100),
+    season VARCHAR(30) NOT NULL DEFAULT '2025-S1',
+    total_pts INT NOT NULL DEFAULT 0,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    CONSTRAINT fk_sp_student FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY uq_student_season (student_id, season)
+)
+
+CREATE TABLE IF NOT EXISTS badges (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  student_id INT NOT NULL,
+  badge_type VARCHAR(60) NOT NULL,
+  awarded_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_badges_student FOREIGN KEY (student_id) REFERENCES users(id),
+  UNIQUE KEY uq_student_badge (student_id, badge_type)
 );

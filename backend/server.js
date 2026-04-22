@@ -4,6 +4,9 @@ import "dotenv/config";
 import { pool } from "./src/db/pool.js";
 
 import authRouter from "./src/routers/auth/auth.routes.js";
+import missionRouter from "./src/routers/mission.routes.js";
+import submissionRouter from "./src/routers/submission.routes.js";
+import verifyRouter from "./src/routers/verification.route.js";
 
 const app = express();
 app.use(
@@ -13,10 +16,14 @@ app.use(
     }),
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// add limit for submission test
+app.use(express.json({ limit: "100mb" }));
+app.use(express.urlencoded({ limit: "100mb", extended: true }));
 
 app.use("/api/auth", authRouter);
+app.use("/api/mission", missionRouter);
+app.use("/api/submission", submissionRouter);
+app.use("/api/verify", verifyRouter);
 
 app.get("/", (req, res) =>
     res.status(404).json({ message: "Route not found" }),

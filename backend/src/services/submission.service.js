@@ -1,7 +1,10 @@
 import crypto from "node:crypto";
 import { pool } from "../db/pool.js";
 import { createHttpError } from "./error.service.js";
-import { removeStoredSubmissionFile, storeSubmissionFile } from "./storage.service.js";
+import {
+    removeStoredSubmissionFile,
+    storeSubmissionFile,
+} from "./storage.service.js";
 
 export const SUBMISSION_STATUS = Object.freeze({
     PENDING: "PENDING",
@@ -10,8 +13,18 @@ export const SUBMISSION_STATUS = Object.freeze({
 const MAX_FILE_NAME_LENGTH = 255;
 const MAX_SUMMARY_LENGTH = 1000;
 const MAX_EVENT_CODE_LENGTH = 50;
-const MAX_FILE_SIZE_BYTES = Number.parseInt(process.env.MAX_SUBMISSION_FILE_SIZE_BYTES ?? "10000000", 10);
-const allowedMimeTypeValues = (process.env.ALLOWED_SUBMISSION_MIME_TYPES ?? "")
+
+// Create static min and max file size first
+const MAX_FILE_SIZE_BYTES = Number.parseInt(
+    process.env.MAX_SUBMISSION_FILE_SIZE_BYTES ?? "104857600",
+    10,
+);
+
+const defaultMimeTypes =
+    "application/pdf,image/jpeg,image/png,application/zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+const allowedMimeTypeValues = (
+    process.env.ALLOWED_SUBMISSION_MIME_TYPES ?? defaultMimeTypes
+)
     .split(",")
     .map((mimeType) => mimeType.trim())
     .filter(Boolean);
@@ -38,7 +51,10 @@ export const decodeSubmissionFileContent = (fileContentBase64) => {
     }
 
     if (!/^[A-Za-z0-9+/=\s]+$/.test(normalizedContent)) {
-        throw createHttpError(400, "fileContentBase64 must be valid base64 content.");
+        throw createHttpError(
+            400,
+            "fileContentBase64 must be valid base64 content.",
+        );
     }
 
     const fileBuffer = Buffer.from(normalizedContent, "base64");
@@ -54,10 +70,18 @@ export const validateSubmissionPayload = (payload = {}) => {
     const errors = [];
     const missionId = Number.parseInt(payload.missionId, 10);
     const studentId = Number.parseInt(payload.studentId, 10);
-    const fileName = typeof payload.fileName === "string" ? payload.fileName.trim() : "";
-    const mimeType = typeof payload.mimeType === "string" ? payload.mimeType.trim() : "application/octet-stream";
-    const textSummary = typeof payload.textSummary === "string" ? payload.textSummary.trim() : "";
-    const eventCode = typeof payload.eventCode === "string" ? payload.eventCode.trim() : "";
+    const fileName =
+        typeof payload.fileName === "string" ? payload.fileName.trim() : "";
+    const mimeType =
+        typeof payload.mimeType === "string"
+            ? payload.mimeType.trim()
+            : "application/octet-stream";
+    const textSummary =
+        typeof payload.textSummary === "string"
+            ? payload.textSummary.trim()
+            : "";
+    const eventCode =
+        typeof payload.eventCode === "string" ? payload.eventCode.trim() : "";
     let fileBuffer = null;
 
     if (!Number.isInteger(missionId) || missionId <= 0) {
@@ -71,17 +95,23 @@ export const validateSubmissionPayload = (payload = {}) => {
     if (!fileName) {
         errors.push("fileName is required.");
     } else if (fileName.length > MAX_FILE_NAME_LENGTH) {
-        errors.push(`fileName must be ${MAX_FILE_NAME_LENGTH} characters or fewer.`);
+        errors.push(
+            `fileName must be ${MAX_FILE_NAME_LENGTH} characters or fewer.`,
+        );
     }
 
     if (!textSummary) {
         errors.push("textSummary is required.");
     } else if (textSummary.length > MAX_SUMMARY_LENGTH) {
-        errors.push(`textSummary must be ${MAX_SUMMARY_LENGTH} characters or fewer.`);
+        errors.push(
+            `textSummary must be ${MAX_SUMMARY_LENGTH} characters or fewer.`,
+        );
     }
 
     if (eventCode.length > MAX_EVENT_CODE_LENGTH) {
-        errors.push(`eventCode must be ${MAX_EVENT_CODE_LENGTH} characters or fewer.`);
+        errors.push(
+            `eventCode must be ${MAX_EVENT_CODE_LENGTH} characters or fewer.`,
+        );
     }
 
     try {
@@ -95,7 +125,9 @@ export const validateSubmissionPayload = (payload = {}) => {
     }
 
     if (allowedMimeTypes.size > 0 && !allowedMimeTypes.has(mimeType)) {
-        errors.push(`mimeType must be one of: ${[...allowedMimeTypes].join(", ")}.`);
+        errors.push(
+            `mimeType must be one of: ${[...allowedMimeTypes].join(", ")}.`,
+        );
     }
 
     return {
@@ -154,7 +186,9 @@ export const createSubmission = async (payload) => {
     );
 
     if (duplicateRows.length > 0) {
-        throw createHttpError(409, "Duplicate submission detected.", ["An identical file has already been submitted."]);
+        throw createHttpError(409, "Duplicate submission detected.", [
+            "An identical file has already been submitted.",
+        ]);
     }
 
     let storedFile = null;
@@ -224,7 +258,9 @@ export const createSubmission = async (payload) => {
         }
 
         if (error.code === "ER_DUP_ENTRY") {
-            throw createHttpError(409, "Duplicate submission detected.", ["An identical file has already been submitted."]);
+            throw createHttpError(409, "Duplicate submission detected.", [
+                "An identical file has already been submitted.",
+            ]);
         }
 
         throw error;
