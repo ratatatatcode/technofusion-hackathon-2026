@@ -6,6 +6,6 @@ export const useRegister = () => {
   return useMutation<authResponse, Error, authData>({
     mutationFn: register,
     onSuccess: (data) => console.log(`data.message`),
-    onError: (error) => console.error(`data.message`),
+    onError: (error) => console.error(`Registration error (${error.message})`),
   });
 };
