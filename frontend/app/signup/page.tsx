@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Sky } from "@/components/Sky";
 
-const departments = ["CAFAD", "CET", "CICS", "COE"] as const;
+const colleges = ["CAFAD", "CET", "CICS", "COE"] as const;
 
 export default function SignupPage() {
   return (
@@ -51,10 +51,10 @@ export default function SignupPage() {
               </select>
             </div>
             <div className="field">
-              <label htmlFor="su-dept">DEPARTMENT</label>
-              <select id="su-dept" name="department" defaultValue="" required>
-                <option value="" disabled>Select department</option>
-                {departments.map((d) => (
+              <label htmlFor="su-colg">COLLEGE</label>
+              <select id="su-colg" name="college" defaultValue="" required>
+                <option value="" disabled>Select college</option>
+                {colleges.map((d) => (
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
