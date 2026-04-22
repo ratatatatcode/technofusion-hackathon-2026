@@ -30,8 +30,8 @@ export default async function ProblemBoardPage() {
             </select>
           </div>
           <div className="field">
-            <label htmlFor="location">LOCATION / DEPT</label>
-            <input id="location" name="location" type="text" placeholder="e.g. CCS Building, 3rd floor" />
+            <label htmlFor="location">LOCATION / COLLEGE</label>
+            <input id="location" name="location" type="text" placeholder="e.g. CICS Building, 3rd floor" />
           </div>
           <div className="field col-span-full">
             <label htmlFor="problem">DESCRIBE THE PROBLEM</label>

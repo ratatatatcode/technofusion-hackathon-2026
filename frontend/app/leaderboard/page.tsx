@@ -21,7 +21,7 @@ export default async function LeaderboardPage() {
     >
       <div className="flex">
         <span className="tab active">👤 INDIVIDUAL</span>
-        <span className="tab">🏛 DEPARTMENT</span>
+        <span className="tab">🏛 COLLEGE</span>
       </div>
 
       <table className="lb-table">
@@ -29,7 +29,7 @@ export default async function LeaderboardPage() {
           <tr>
             <th>RANK</th>
             <th>PLAYER</th>
-            <th>DEPT</th>
+            <th>COLLEGE</th>
             <th>QUESTS</th>
             <th>COINS</th>
           </tr>
@@ -85,12 +85,12 @@ export default async function LeaderboardPage() {
       </div>
 
       <div className="panel">
-        <h2>🏛 TOP DEPARTMENTS</h2>
+        <h2>🏛 TOP COLLEGES</h2>
         <table className="lb-table">
           <thead>
             <tr>
               <th>RANK</th>
-              <th>DEPARTMENT</th>
+              <th>COLLEGE</th>
               <th>PLAYERS</th>
               <th>TOTAL COINS</th>
             </tr>

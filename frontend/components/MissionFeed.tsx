@@ -11,7 +11,7 @@ type MissionFeedProps = {
   tiers?: readonly MissionTier[];
 };
 
-const defaultDepartments = ["CCS", "COE", "CBA", "CAS", "COED"] as const;
+const defaultDepartments = ["CAFAD", "CET", "CICS", "COE"] as const;
 const defaultTiers: readonly MissionTier[] = ["bronze", "silver", "gold", "contest"];
 
 export function MissionFeed({
@@ -42,7 +42,7 @@ export function MissionFeed({
   return (
     <>
       <div className="filters">
-        <button type="button" onClick={() => setDepartment(null)} className={`filter-chip ${!department ? "active" : ""}`}>ALL DEPTS</button>
+        <button type="button" onClick={() => setDepartment(null)} className={`filter-chip ${!department ? "active" : ""}`}>ALL COLLEGES</button>
         {departments.map((dept) => (
           <button key={dept} type="button" onClick={() => setDepartment(dept)} className={`filter-chip ${department === dept ? "active" : ""}`}>{dept}</button>
         ))}

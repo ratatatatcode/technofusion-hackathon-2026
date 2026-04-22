@@ -19,7 +19,7 @@ import type {
 } from "./types";
 
 export const mockCatalog: Catalog = {
-  departments: ["CCS", "COE", "CBA", "CAS", "COED"],
+  departments: ["CAFAD", "CET", "CICS", "COE"],
   tiers: [
     { value: "bronze", label: "🪙 Bronze", points: 10 },
     { value: "silver", label: "⭐ Silver", points: 50 },
