@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Press_Start_2P, VT323 } from "next/font/google";
 
 import { PixelEffects } from "@/components/PixelEffects";
+import Providers from "@/lib/provider/Provider";
 
 import "./globals.css";
 
@@ -22,12 +23,14 @@ export const metadata: Metadata = {
   description: "Pixelated campus mission UI built with Next.js.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${pressStart.variable} ${vt323.variable}`}>
         <PixelEffects />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
