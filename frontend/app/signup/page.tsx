@@ -43,6 +43,11 @@ export default function SignupPage() {
               <input id="su-pw" name="password" type="password" placeholder="••••••••" autoComplete="new-password" required />
             </div>
 
+            <div className="field col-span-full">
+              <label htmlFor="su-pw">CONFIRM PASSWORD</label>
+              <input id="su-pw" name="password" type="password" placeholder="••••••••" autoComplete="new-password" required />
+            </div>
+
             <div className="field">
               <label htmlFor="su-role">ROLE</label>
               <select id="su-role" name="role" defaultValue="student" required>
