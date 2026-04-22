@@ -78,3 +78,24 @@ CREATE TABLE IF NOT EXISTS badges (
   CONSTRAINT fk_badges_student FOREIGN KEY (student_id) REFERENCES users(id),
   UNIQUE KEY uq_student_badge (student_id, badge_type)
 );
+
+
+/* ===== Problem Board ===== */
+CREATE TABLE IF NOT EXISTS problems (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_problems_user FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS problem_quests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    problem_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    points INT DEFAULT 10,
+    is_active TINYINT(1) DEFAULT 1,
+    CONSTRAINT fk_quests_problem FOREIGN KEY (problem_id) REFERENCES problems(id) ON DELETE CASCADE
+);
