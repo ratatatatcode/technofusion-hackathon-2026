@@ -20,6 +20,7 @@ export default async function AdminMissionsPage() {
           {missions.map((mission) => (
             <AdminMissionRow
               key={mission.id}
+              id={mission.id}
               title={mission.title}
               tier={mission.tier}
               sdg={mission.sdg}
