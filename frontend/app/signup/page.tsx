@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Sky } from "@/components/Sky";
 
-const departments = ["CCS", "COE", "CBA", "CAS", "COED"] as const;
+const departments = ["CAFAD", "CET", "CICS", "COE"] as const;
 
 export default function SignupPage() {
   return (
@@ -13,7 +13,7 @@ export default function SignupPage() {
         <Link href="/" className="auth-logo">
           <span className="coin-icon" />
           <span className="logo-text">
-            MISSION<span className="accent">QUEST</span>
+            CAMPUS<span className="accent">QUEST</span>
           </span>
         </Link>
 
@@ -26,7 +26,7 @@ export default function SignupPage() {
           <form className="grid grid-cols-2 gap-4 max-[900px]:grid-cols-1">
             <div className="field">
               <label htmlFor="su-id">SCHOOL ID</label>
-              <input id="su-id" name="id" type="text" placeholder="e.g. 2026-00001" autoComplete="username" required />
+              <input id="su-id" name="id" type="text" placeholder="e.g. 12-34567" autoComplete="username" required />
             </div>
             <div className="field">
               <label htmlFor="su-name">FULL NAME</label>
@@ -35,7 +35,7 @@ export default function SignupPage() {
 
             <div className="field col-span-full">
               <label htmlFor="su-email">EMAIL</label>
-              <input id="su-email" name="email" type="email" placeholder="player@campus.edu" autoComplete="email" required />
+              <input id="su-email" name="email" type="email" placeholder="juandelacruz@g.batstate-u.edu.ph" autoComplete="email" required />
             </div>
 
             <div className="field col-span-full">

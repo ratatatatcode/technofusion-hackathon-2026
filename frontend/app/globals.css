@@ -487,6 +487,9 @@ button { background: none; }
   box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.1);
   color: var(--text-dark);
 }
+.field, .field select, .field option {
+  font-family: var(--font-body);
+}
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
   background: #fff;

@@ -11,7 +11,7 @@ export default function LoginPage() {
         <Link href="/" className="auth-logo">
           <span className="coin-icon" />
           <span className="logo-text">
-            MISSION<span className="accent">QUEST</span>
+            CAMPUS<span className="accent">QUEST</span>
           </span>
         </Link>
 
@@ -24,7 +24,7 @@ export default function LoginPage() {
           <form className="grid grid-cols-2 gap-4 max-[900px]:grid-cols-1">
             <div className="field col-span-full">
               <label htmlFor="auth-id">SCHOOL ID / USERNAME</label>
-              <input id="auth-id" type="text" placeholder="e.g. 2026-00001" autoComplete="username" />
+              <input id="auth-id" type="text" placeholder="e.g. 12-34567" autoComplete="username" />
             </div>
             <div className="field col-span-full">
               <label htmlFor="auth-pw">PASSWORD</label>
@@ -32,7 +32,7 @@ export default function LoginPage() {
             </div>
             <div className="field col-span-full auth-options">
               <label className="auth-check">
-                <input type="checkbox" defaultChecked /> Remember me
+                <input type="checkbox" className="cursor-pointer"/> Remember me
               </label>
               <Link href="#" className="auth-forgot">Forgot password?</Link>
             </div>
