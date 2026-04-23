@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS problem_quests (
     problem_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
+    duration VARCHAR(20) NOT NULL DEFAULT '1 week',
     points INT DEFAULT 10,
     is_active TINYINT(1) DEFAULT 1,
     CONSTRAINT fk_quests_problem FOREIGN KEY (problem_id) REFERENCES problems(id) ON DELETE CASCADE
