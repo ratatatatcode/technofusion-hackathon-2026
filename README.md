@@ -110,9 +110,8 @@ Campus Quest acts as a **connective layer** on top of existing university progra
 
 - **Frontend:** Next.js
 - **Backend:** Express.js
-- **Real-time:** WebSockets
 - **Execution/Services:** Docker (for scalable systems)
-- **Database:** SQL / Firebase (depending on module)
+- **Database:** SQL
 
 ---
 
