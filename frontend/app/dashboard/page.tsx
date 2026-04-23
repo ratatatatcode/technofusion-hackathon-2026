@@ -7,7 +7,7 @@ export default async function DashboardPage() {
 
   return (
     <SubpageShell
-      title={`🍄 PLAYER 1 — ${user.name.toUpperCase()}`}
+      title={`PLAYER ${user.name.toUpperCase()}`}
       subtitle={`${user.department}${user.year ? ` · ${user.year}` : ""} · Member since World 1-1`}
       ctaHref="/submit-proof"
       ctaLabel="+ SUBMIT PROOF"
@@ -40,9 +40,13 @@ export default async function DashboardPage() {
                 <span>{entry.label}</span>
                 <span
                   className="pts"
-                  style={entry.status === "pending" ? { color: "#888" } : undefined}
+                  style={
+                    entry.status === "pending" ? { color: "#888" } : undefined
+                  }
                 >
-                  {entry.status === "pending" ? "PENDING" : `+${entry.points} PTS`}
+                  {entry.status === "pending"
+                    ? "PENDING"
+                    : `+${entry.points} PTS`}
                 </span>
               </li>
             ))}
@@ -71,7 +75,9 @@ export default async function DashboardPage() {
           {activeMissions.map((mission) => (
             <div className="mission-card" key={mission.id}>
               <div className="top">
-                <span className={`tier-badge ${mission.tier}`}>{mission.tier}</span>
+                <span className={`tier-badge ${mission.tier}`}>
+                  {mission.tier}
+                </span>
                 <span className="sdg-badge">{mission.sdg}</span>
               </div>
               <h3>{mission.title}</h3>

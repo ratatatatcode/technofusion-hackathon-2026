@@ -85,7 +85,7 @@ export default function RegisterComponent() {
                 id="su-name"
                 name="name"
                 type="text"
-                placeholder="Mario Rossi"
+                placeholder="Juan Dela Cruz"
                 autoComplete="name"
                 value={form.name}
                 onChange={handleChange}

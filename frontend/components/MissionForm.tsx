@@ -6,7 +6,13 @@ import { FormEvent, useMemo, useState } from "react";
 
 import { createMission, updateMission } from "@/lib/api";
 import { mockCatalog } from "@/lib/mockData";
-import type { Catalog, Mission, MissionCreateInput, MissionStatus, MissionUpdateInput } from "@/lib/types";
+import type {
+  Catalog,
+  Mission,
+  MissionCreateInput,
+  MissionStatus,
+  MissionUpdateInput,
+} from "@/lib/types";
 
 export type MissionFormProps = {
   cancelHref: string;
@@ -42,7 +48,7 @@ export function MissionForm({
 
   const safeDefaults = useMemo(
     () => ({
-      department: mission?.department ?? departmentOptions[0] ?? "CCS",
+      department: mission?.department ?? departmentOptions[0] ?? "CICS",
       title: mission?.title ?? "",
       category: mission?.category ?? categoryOptions[0] ?? "Sustainability",
       tier: mission?.tier ?? tierOptions[1]?.value ?? "silver",
@@ -64,12 +70,15 @@ export function MissionForm({
       tierOptions,
       durationOptions,
       sdgOptions,
-    ]
+    ],
   );
 
   const targetHref = successHref ?? cancelHref;
 
-  const parsePositiveInt = (value: FormDataEntryValue | null, fallback: number): number => {
+  const parsePositiveInt = (
+    value: FormDataEntryValue | null,
+    fallback: number,
+  ): number => {
     if (typeof value !== "string") return fallback;
     const parsed = Number.parseInt(value, 10);
     return Number.isNaN(parsed) ? fallback : parsed;
@@ -78,7 +87,9 @@ export function MissionForm({
   const normalizeText = (value: FormDataEntryValue | null): string =>
     typeof value === "string" ? value.trim() : "";
 
-  const normalizeOptionalText = (value: FormDataEntryValue | null): string | null => {
+  const normalizeOptionalText = (
+    value: FormDataEntryValue | null,
+  ): string | null => {
     const normalized = normalizeText(value);
     return normalized === "" ? null : normalized;
   };
@@ -107,9 +118,14 @@ export function MissionForm({
           sdg: normalizeText(formData.get("sdg")),
           points: parsePositiveInt(formData.get("points"), safeDefaults.points),
           eventCode: normalizeOptionalText(formData.get("eventCode")),
-          evidenceRequirements: normalizeOptionalText(formData.get("evidenceRequirements")),
+          evidenceRequirements: normalizeOptionalText(
+            formData.get("evidenceRequirements"),
+          ),
           rewards: normalizeText(formData.get("rewards")),
-          playerSlots: parsePositiveInt(formData.get("playerSlots"), safeDefaults.playerSlots),
+          playerSlots: parsePositiveInt(
+            formData.get("playerSlots"),
+            safeDefaults.playerSlots,
+          ),
           deadline: normalizeOptionalText(formData.get("deadline")),
           status: normalizeText(formData.get("status")) as MissionStatus,
         };
@@ -126,9 +142,14 @@ export function MissionForm({
           sdg: normalizeText(formData.get("sdg")),
           points: parsePositiveInt(formData.get("points"), safeDefaults.points),
           eventCode: normalizeOptionalText(formData.get("eventCode")),
-          evidenceRequirements: normalizeOptionalText(formData.get("evidenceRequirements")),
+          evidenceRequirements: normalizeOptionalText(
+            formData.get("evidenceRequirements"),
+          ),
           rewards: normalizeText(formData.get("rewards")),
-          playerSlots: parsePositiveInt(formData.get("playerSlots"), safeDefaults.playerSlots),
+          playerSlots: parsePositiveInt(
+            formData.get("playerSlots"),
+            safeDefaults.playerSlots,
+          ),
           deadline: normalizeOptionalText(formData.get("deadline")),
         };
 
@@ -138,7 +159,11 @@ export function MissionForm({
       router.push(targetHref);
       router.refresh();
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Unable to save mission right now.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to save mission right now.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -148,14 +173,28 @@ export function MissionForm({
     <div className="panel">
       <h2>{heading}</h2>
       {errorMessage && (
-        <p style={{ color: "#ffd4d4", background: "#8b3000", padding: "8px 10px", marginBottom: 16 }}>
+        <p
+          style={{
+            color: "#ffd4d4",
+            background: "#8b3000",
+            padding: "8px 10px",
+            marginBottom: 16,
+          }}
+        >
           {errorMessage}
         </p>
       )}
-      <form className="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1" onSubmit={handleSubmit}>
+      <form
+        className="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1"
+        onSubmit={handleSubmit}
+      >
         <div className="field">
           <label htmlFor="department">DEPARTMENT</label>
-          <select id="department" name="department" defaultValue={safeDefaults.department}>
+          <select
+            id="department"
+            name="department"
+            defaultValue={safeDefaults.department}
+          >
             {departmentOptions.map((department) => (
               <option key={department}>{department}</option>
             ))}
@@ -176,7 +215,11 @@ export function MissionForm({
 
         <div className="field">
           <label htmlFor="category">CATEGORY</label>
-          <select id="category" name="category" defaultValue={safeDefaults.category}>
+          <select
+            id="category"
+            name="category"
+            defaultValue={safeDefaults.category}
+          >
             {categoryOptions.map((category) => (
               <option key={category}>{category}</option>
             ))}
@@ -207,7 +250,11 @@ export function MissionForm({
 
         <div className="field">
           <label htmlFor="duration">DURATION</label>
-          <select id="duration" name="duration" defaultValue={safeDefaults.duration}>
+          <select
+            id="duration"
+            name="duration"
+            defaultValue={safeDefaults.duration}
+          >
             {durationOptions.map((duration) => (
               <option key={duration}>{duration}</option>
             ))}
@@ -225,12 +272,26 @@ export function MissionForm({
 
         <div className="field">
           <label htmlFor="points">POINT VALUE</label>
-          <input id="points" name="points" type="number" defaultValue={safeDefaults.points} min={1} max={1000} required />
+          <input
+            id="points"
+            name="points"
+            type="number"
+            defaultValue={safeDefaults.points}
+            min={1}
+            max={1000}
+            required
+          />
         </div>
 
         <div className="field">
           <label htmlFor="event-code">EVENT CODE (CONTEST ONLY)</label>
-          <input id="event-code" name="eventCode" type="text" placeholder="e.g. HACK2026" defaultValue={safeDefaults.eventCode} />
+          <input
+            id="event-code"
+            name="eventCode"
+            type="text"
+            placeholder="e.g. HACK2026"
+            defaultValue={safeDefaults.eventCode}
+          />
         </div>
 
         <div className="field col-span-full">
@@ -256,18 +317,35 @@ export function MissionForm({
 
         <div className="field">
           <label htmlFor="slots">PLAYER SLOTS</label>
-          <input id="slots" name="playerSlots" type="number" defaultValue={safeDefaults.playerSlots} min={1} max={9999} required />
+          <input
+            id="slots"
+            name="playerSlots"
+            type="number"
+            defaultValue={safeDefaults.playerSlots}
+            min={1}
+            max={9999}
+            required
+          />
         </div>
 
         <div className="field">
           <label htmlFor="deadline">DEADLINE</label>
-          <input id="deadline" name="deadline" type="date" defaultValue={safeDefaults.deadline} />
+          <input
+            id="deadline"
+            name="deadline"
+            type="date"
+            defaultValue={safeDefaults.deadline}
+          />
         </div>
 
         {isEditMode && (
           <div className="field">
             <label htmlFor="status">STATUS</label>
-            <select id="status" name="status" defaultValue={safeDefaults.status}>
+            <select
+              id="status"
+              name="status"
+              defaultValue={safeDefaults.status}
+            >
               <option value="draft">DRAFT</option>
               <option value="live">LIVE</option>
               <option value="ended">ENDED</option>
@@ -279,7 +357,11 @@ export function MissionForm({
           <Link href={cancelHref} className="pixel-btn">
             CANCEL
           </Link>
-          <button type="submit" className="pixel-btn pixel-btn-green" disabled={submitting}>
+          <button
+            type="submit"
+            className="pixel-btn pixel-btn-green"
+            disabled={submitting}
+          >
             {submitting ? "SAVING..." : submitLabel}
           </button>
         </div>
