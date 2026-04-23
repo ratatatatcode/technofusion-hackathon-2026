@@ -4,29 +4,18 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Sky } from "@/components/Sky";
 import { useLogin } from "@/lib/hooks/useAuth";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { userCredentials } from "@/lib/types/authData";
 import { useRouter } from "next/navigation";
 
 export default function LoginComponent() {
   const login = useLogin();
   const router = useRouter();
-  const isPending = login.isPending;
 
   const [form, setForm] = useState<userCredentials>({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    if (isPending) return;
-
-    const timer = setTimeout(() => {
-      router.push(`/dashboard`);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [router, isPending]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,7 +28,16 @@ export default function LoginComponent() {
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login.mutate(form);
+
+    login.mutate(form, {
+      onSuccess: (data) => {
+        if (data.user.role === "admin") {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
+      },
+    });
   };
 
   return (
@@ -47,7 +45,6 @@ export default function LoginComponent() {
       <Sky full />
       <main className="relative z-1 min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-6 pt-10 pb-20">
         <Link href="/" className="auth-logo">
-          <span className="coin-icon" />
           <span className="logo-text">
             CAMPUS<span className="accent">QUEST</span>
           </span>

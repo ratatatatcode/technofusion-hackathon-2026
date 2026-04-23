@@ -1,25 +1,32 @@
-import { apiResponse } from "./apiResponse";
-
-export interface authData {
+export type User = {
   id: string;
   name: string;
   email: string;
-  password: string;
   role: "student" | "admin";
-  department?: string | null;
-}
+  department?: string;
+};
 
-export interface userCredentials {
+export type registerResponse = {
+  message: string;
+  userId: string;
+};
+
+export type loginResponse = {
+  message: string;
+  token: string;
+  user: User;
+};
+
+export type userCredentials = {
   email: string;
   password: string;
-}
+};
 
-export interface registerResponse extends apiResponse {
-  data: {
-    userId: number;
-  };
-}
-
-export interface loginResponse extends apiResponse {
-  data: authData;
-}
+export type authData = {
+  id?: string;
+  name: string;
+  email: string;
+  password: string;
+  role?: "student" | "admin";
+  department?: string;
+};
