@@ -25,8 +25,9 @@ export default async function InnovationWallPage() {
 
       <div className="panel">
         <h2>🌍 SDG HEAT MAP — BRIGHTNESS = COMPLETION COUNT</h2>
-        <p className="text-[18px] mb-[18px]">
-          17 tiles. The brighter it glows, the more your campus has done for that goal.
+        <p className="text-[18px] mb-4.5">
+          17 tiles. The brighter it glows, the more your campus has done for
+          that goal.
         </p>
         <div className="grid grid-cols-6 gap-3 max-[900px]:grid-cols-4 max-[500px]:grid-cols-3">
           {wall.heatmap.map((tile) => (
