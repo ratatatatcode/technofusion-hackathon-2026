@@ -130,7 +130,7 @@ By making engagement measurable, rewarding, and scalable.
 **Burgis**
 - Kobe Andrew Capinpin
 - James Michael Magnaye
-- Carle Medina
+- Carle Francis Medina
 - Alexander Guille Penuliar
 - Clarence Zamora
 ---
