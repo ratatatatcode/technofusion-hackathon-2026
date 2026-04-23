@@ -18,12 +18,12 @@ export type Mission = {
   description: string;
   tier: MissionTier;
   status: MissionStatus;
-  department: string;      // "CCS", "COE", etc.
-  sdg: string;             // "SDG 13"
-  category: string;        // "Sustainability", etc.
-  points: number;          // numeric coin value
-  duration: string;        // human readable, e.g. "1 week"
-  rewards: string;         // free-form prize description
+  department: string; // "CICS", "COE", etc.
+  sdg: string; // "SDG 13"
+  category: string; // "Sustainability", etc.
+  points: number; // numeric coin value
+  duration: string; // human readable, e.g. "1 week"
+  rewards: string; // free-form prize description
   eventCode?: string | null;
   playerSlots?: number | null;
   deadline?: string | null; // ISO date
@@ -135,7 +135,7 @@ export type LoginResponse = {
 export type MissionHistoryItem = {
   id: string;
   label: string;
-  points: number | null;    // null = pending
+  points: number | null; // null = pending
   status: "approved" | "pending";
 };
 

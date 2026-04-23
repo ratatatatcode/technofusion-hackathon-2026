@@ -299,7 +299,7 @@ changes required.
 - [ ] Implement auth (`/auth/login`, `/auth/me`, `/auth/logout`) with JWT.
 - [ ] Implement mission CRUD + filters.
 - [ ] Implement submissions flow (create, approve, reject).
-- [ ] Implement problem board + Claude breakdown on create.
+- [ ] Implement problem board.
 - [ ] Implement dashboards + leaderboards + innovation wall.
 - [ ] Optional: `/uploads` for proof photos.
 - [ ] Verify every response shape against `lib/mockData.ts` (same field
