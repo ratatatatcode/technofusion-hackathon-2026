@@ -1,6 +1,6 @@
 import Link from "next/link";
-
 import { studentNavItems, type NavItem } from "@/components/site-data";
+import Image from "next/image";
 
 export type SiteNavProps = {
   ctaHref: string;
@@ -25,7 +25,12 @@ export function SiteNav({
   return (
     <nav className={`pixel-nav nav-${variant}`}>
       <Link href={logoHref} className="logo">
-        <span className="coin-icon" />
+        <Image
+          src={"/logo/android-chrome-192x192.png"}
+          height={50}
+          width={50}
+          alt="campus-quest-logo"
+        />
         <span className="logo-text">
           CAMPUS<span className="accent">QUEST</span>
         </span>
@@ -43,7 +48,11 @@ export function SiteNav({
           {ctaLabel}
         </Link>
         {showLogout && (
-          <Link href="/login" className="pixel-btn pixel-btn-red logout-btn" title="Logout">
+          <Link
+            href="/login"
+            className="pixel-btn pixel-btn-red logout-btn"
+            title="Logout"
+          >
             ⏻ LOGOUT
           </Link>
         )}
