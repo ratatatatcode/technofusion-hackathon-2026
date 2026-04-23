@@ -9,8 +9,17 @@ export interface authData {
   department?: string | null;
 }
 
-export interface authResponse extends apiResponse {
+export interface userCredentials {
+  email: string;
+  password: string;
+}
+
+export interface registerResponse extends apiResponse {
   data: {
     userId: number;
   };
+}
+
+export interface loginResponse extends apiResponse {
+  data: authData;
 }
