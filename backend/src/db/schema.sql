@@ -45,14 +45,20 @@ CREATE TABLE IF NOT EXISTS submissions (
     mime_type VARCHAR(120) NOT NULL,
     text_summary VARCHAR(1000) NOT NULL,
     event_code VARCHAR(50) NULL,
-    status ENUM('PENDING') NOT NULL DEFAULT 'PENDING',
+    status ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL DEFAULT 'PENDING',  -- Updated status
+    verified_by INT NULL,
+    verified_at TIMESTAMP NULL,
+    reject_reason VARCHAR(1000) NULL,
     submitted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
     CONSTRAINT fk_submissions_mission FOREIGN KEY (mission_id) REFERENCES missions(id),
     CONSTRAINT fk_submissions_student FOREIGN KEY (student_id) REFERENCES users(id),
+    CONSTRAINT fk_submissions_verifier FOREIGN KEY (verified_by) REFERENCES users(id),
     CONSTRAINT uq_submissions_file_hash UNIQUE KEY (file_hash),
+    
     INDEX idx_submissions_student_id (student_id),
     INDEX idx_submissions_status_submitted_at (status, submitted_at)
-);
+)
 
 
 

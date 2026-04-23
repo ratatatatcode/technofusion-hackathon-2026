@@ -8,6 +8,7 @@ import missionRouter from "./src/routers/mission.routes.js";
 import submissionRouter from "./src/routers/submission.routes.js";
 import verifyRouter from "./src/routers/verification.route.js";
 import problemRouter from "./src/routers/problem.routes.js";
+import wallRouter from "./src/routers/wall.routes.js";
 
 const app = express();
 app.use(
@@ -26,6 +27,7 @@ app.use("/api/mission", missionRouter);
 app.use("/api/submission", submissionRouter);
 app.use("/api/verify", verifyRouter);
 app.use("/api/problems", problemRouter);
+app.use("/api/wall", wallRouter);
 
 app.get("/", (req, res) =>
     res.status(404).json({ message: "Route not found" }),
