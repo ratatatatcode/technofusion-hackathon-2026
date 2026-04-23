@@ -50,7 +50,6 @@ export default function RegisterComponent() {
       <Sky full />
       <main className="relative z-1 min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-6 pt-10 pb-20">
         <Link href="/" className="auth-logo">
-          <span className="coin-icon" />
           <span className="logo-text">
             CAMPUS<span className="accent">QUEST</span>
           </span>
