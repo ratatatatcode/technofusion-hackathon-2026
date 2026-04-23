@@ -100,7 +100,7 @@ Campus Quest acts as a **connective layer** on top of existing university progra
 
 ## Future Plans
 
-- 🎓 SDG-aligned **certification courses**
+- SDG-aligned **certification courses**
 - Unlockable via **points or payment**
 - Turning engagement into **verifiable credentials**
 
