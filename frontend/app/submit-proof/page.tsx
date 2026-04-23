@@ -18,19 +18,30 @@ export default function SubmitProofPage() {
             CONTEST
           </span>
         </h2>
-        <p className="text-[18px] mb-[18px]">
+        <p className="text-[18px] mb-4.5">
           Required: 1 team photo, code repo link, 200-word summary, event code.
         </p>
-        <form className="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1" encType="multipart/form-data">
+        <form
+          className="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1"
+          encType="multipart/form-data"
+        >
           <input type="hidden" name="missionId" value="m-4" />
           <div className="field col-span-full">
             <label htmlFor="proof-file">📷 PHOTO EVIDENCE</label>
             <label className="file-drop" htmlFor="proof-file">
               DROP IMAGE HERE OR CLICK TO UPLOAD
               <br />
-              <small style={{ fontFamily: "var(--font-body)", fontSize: 18 }}>PNG / JPG · MAX 5MB</small>
+              <small style={{ fontFamily: "var(--font-body)", fontSize: 18 }}>
+                PNG / JPG · MAX 5MB
+              </small>
             </label>
-            <input id="proof-file" name="photo" type="file" accept="image/*" hidden />
+            <input
+              id="proof-file"
+              name="photo"
+              type="file"
+              accept="image/*"
+              hidden
+            />
           </div>
           <div className="field col-span-full">
             <label htmlFor="summary">TEXT SUMMARY</label>
@@ -42,11 +53,21 @@ export default function SubmitProofPage() {
           </div>
           <div className="field">
             <label htmlFor="code">🔥 EVENT CODE (CONTEST)</label>
-            <input id="code" name="eventCode" type="text" placeholder="e.g. HACK2026" />
+            <input
+              id="code"
+              name="eventCode"
+              type="text"
+              placeholder="e.g. HACK2026"
+            />
           </div>
           <div className="field">
             <label htmlFor="link">LINK (OPTIONAL)</label>
-            <input id="link" name="linkUrl" type="url" placeholder="https://github.com/..." />
+            <input
+              id="link"
+              name="linkUrl"
+              type="url"
+              placeholder="https://github.com/..."
+            />
           </div>
           <div className="col-span-full flex gap-3.5 justify-end mt-2.5">
             <Link href="/missions" className="pixel-btn">

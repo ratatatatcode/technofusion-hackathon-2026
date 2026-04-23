@@ -41,7 +41,9 @@ export function SubpageShell({
         homeHref={homeHref}
         showLogout
       />
-      <div className={`mx-auto my-10 px-6 pb-20 max-[500px]:px-4 ${variant === "admin" ? "max-w-[1280px]" : "max-w-[1200px]"}`}>
+      <div
+        className={`mx-auto my-10 px-6 pb-20 max-[500px]:px-4 ${variant === "admin" ? "max-w-7xl" : "max-w-300"}`}
+      >
         <div className="text-center mb-10 page-header">
           <h1>{title}</h1>
           <p>{subtitle}</p>

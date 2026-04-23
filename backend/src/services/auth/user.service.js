@@ -16,6 +16,7 @@ export const findUserById = async (id) => {
 };
 
 export const createUser = async ({
+    id,
     name,
     email,
     password,
@@ -23,8 +24,8 @@ export const createUser = async ({
     department,
 }) => {
     const [result] = await pool.query(
-        "INSERT INTO users (name, email, password, role, department) VALUES (?, ?, ?, ?, ?)",
-        [name, email, password, role || "student", department || null],
+        "INSERT INTO users (id, name, email, password, role, department) VALUES (?, ?, ?, ?, ?, ?)",
+        [id, name, email, password, role || "student", department || null],
     );
     return result.insertId;
 };

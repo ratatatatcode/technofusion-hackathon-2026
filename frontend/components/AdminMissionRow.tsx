@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 import type { MissionStatus, MissionTier } from "@/lib/types";
 
 type AdminMissionRowProps = {
+  id: string;
   title: string;
   tier: MissionTier;
   sdg: string;
@@ -16,6 +19,7 @@ const statusBg: Record<MissionStatus, string> = {
 };
 
 export function AdminMissionRow({
+  id,
   title,
   tier,
   sdg,
@@ -43,7 +47,7 @@ export function AdminMissionRow({
         <div className="amr-count">{participants}</div>
         <div className="amr-count-label">PLAYERS</div>
         <div className="flex gap-2 mt-1.5">
-          <button type="button" className="pixel-btn pixel-btn-blue">EDIT</button>
+          <Link href={`/admin/missions/${id}/edit`} className="pixel-btn pixel-btn-blue">EDIT</Link>
           <button type="button" className="pixel-btn pixel-btn-red">END</button>
         </div>
       </div>

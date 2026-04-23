@@ -10,7 +10,7 @@ const SALT_ROUNDS = 10;
 
 export const register = async (req, res) => {
     try {
-        const { name, email, password, role, department } = req.body;
+        const { id, name, email, password, role, department } = req.body;
 
         if (!name || !email || !password) {
             return res
@@ -34,6 +34,7 @@ export const register = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
         const userId = await createUser({
+            id,
             name,
             email,
             password: hashedPassword,
