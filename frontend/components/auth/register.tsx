@@ -18,7 +18,7 @@ export default function RegisterComponent() {
     email: "",
     password: "",
     role: "student",
-    department: null,
+    department: "",
   });
 
   const [confirmPassword, setConfirmPassword] = useState("");
